@@ -9,13 +9,13 @@ import java.time.LocalDate;
 @Data
 @NoArgsConstructor
 @Entity
-@Table
+@Table(name = "task")
 public class Task {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column
-    private long taskId;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "task_id")
+    private Long taskId;
 
     @Column(nullable = false)
     private String title;
@@ -28,11 +28,11 @@ public class Task {
     @Column
     private Priority priority;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @JoinColumn(name = "user_id")
     private User user;
 
-    @Column
+    @Column(name = "due_date")
     private LocalDate dueDate;
 
 }
